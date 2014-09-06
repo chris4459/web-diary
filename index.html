@@ -9,9 +9,12 @@
 <script src='fullcalendar.min.js'></script>
 <script>
 
+
+
 	$(document).ready(function() {
 
 		$('#calendar').fullCalendar({
+			fixedWeekCount: false,
 			dayClick: function(date, jsEvent, view) {
 
 			/*
