@@ -50,7 +50,38 @@
 </head>
 <body>
 
+
 	<div id='calendar'></div>
+
+	<!-- Add an optional button to open the popup -->
+  <button class="my_popup_open">Open popup</button>
+
+  <!-- Add content to the popup -->
+  <div id="my_popup">
+    ...popup content...
+
+    <!-- Add an optional button to close the popup -->
+    <button class="my_popup_close">Close</button>
+
+  </div>
+
+  <!-- Include jQuery -->
+  <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+
+  <!-- Include jQuery Popup Overlay -->
+  <script src="http://vast-eng.github.io/jquery-popup-overlay/jquery.popupoverlay.js"></script>
+
+  <script>
+    $(document).ready(function() {
+
+      // Initialize the plugin
+      $('#my_popup').popup();
+
+    });
+  </script>
+
+
+	<!--<a href="#" onclick="Popup.showModal('modal');return false;">Show Modal Popup</a>-->
 
 </body>
 </html>
