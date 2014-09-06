@@ -33,6 +33,25 @@
 
 	});
 
+	$(document).keydown(function(e){
+    if (e.keyCode == 37) { 
+        $('#calendar').fullCalendar('prev');
+        return false;
+    }
+    if (e.keyCode == 38) { 
+        $('#calendar').fullCalendar('prevYear');
+        return false;
+    }
+    if (e.keyCode == 39) { 
+        $('#calendar').fullCalendar('next');
+        return false;
+    }
+    if (e.keyCode == 40) { 
+        $('#calendar').fullCalendar('nextYear');
+        return false;
+    }
+	});
+
 
 	
 
