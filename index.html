@@ -14,11 +14,16 @@
 		$('#calendar').fullCalendar({
 			dayClick: function(date, jsEvent, view) {
 
+			/*
 	        alert('Clicked on: ' + date.format());
 
 	        alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
 
 	        alert('Current view: ' + view.name);
+	        */
+
+	        $('#text_area').text(date.format() + '\nFour score and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal.');
+	        $('#my_popup').popup('show');
 
 	        // change the day's background color just for fun
 	        //$(this).css('background-color', 'red');
@@ -26,6 +31,25 @@
 			
 		});
 
+	});
+
+	$(document).keydown(function(e){
+    if (e.keyCode == 37) { 
+        $('#calendar').fullCalendar('prev');
+        return false;
+    }
+    if (e.keyCode == 38) { 
+        $('#calendar').fullCalendar('prevYear');
+        return false;
+    }
+    if (e.keyCode == 39) { 
+        $('#calendar').fullCalendar('next');
+        return false;
+    }
+    if (e.keyCode == 40) { 
+        $('#calendar').fullCalendar('nextYear');
+        return false;
+    }
 	});
 
 
@@ -46,11 +70,74 @@
 		margin: 0 auto;
 	}
 
+	
+	#my_popup_wrapper,
+	#my_popup_background {
+	  -webkit-tranzition: all 0.3s;
+	     -moz-tranzition: all 0.3s;
+	          transition: all 0.3s;
+	}
+
+	#my_popup {
+    -webkit-transform: scale(0.8);
+       -moz-transform: scale(0.8);
+        -ms-transform: scale(0.8);
+            transform: scale(0.8);
+	}
+	.popup_visible #my_popup {
+	    -webkit-transform: scale(1);
+	       -moz-transform: scale(1);
+	        -ms-transform: scale(1);
+	            transform: scale(1);
+	}
+
+
 </style>
 </head>
 <body>
 
+
 	<div id='calendar'></div>
+
+	<!-- Add an optional button to open the popup -->
+  <button class="my_popup_open">Open popup</button>
+
+  <!-- Add content to the popup -->
+  <div id="my_popup">
+  	<div style="position: relative">
+  		<img border="0" src="https://100dialysis.files.wordpress.com/2013/03/blank-page.jpg" alt="Ah sheit" width="773.12" height="965.12">
+  		<div style="position:absolute;left:50px;top:50px; font-size: 32px;display: true">
+  			<p id="text_area">
+	      		Test
+	      	</p>
+	    </div>
+    
+	</div>
+
+    <!-- Add an optional button to close the popup -->
+    <button class="my_popup_close">Close</button>
+
+  </div>
+
+  <!-- Include jQuery -->
+  
+
+  <!-- Include jQuery Popup Overlay -->
+  <script src="lib/jquery-popup-overlay-gh-pages/jquery.popupoverlay.js"></script>
+
+  <script>
+    $(document).ready(function() {
+
+      // Initialize the plugin
+      $('#my_popup').popup();
+
+    });
+  </script>
+
+
+
+	
+
 
 </body>
 </html>
