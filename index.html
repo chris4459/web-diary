@@ -13,6 +13,43 @@
 
 	$(document).ready(function() {
 
+		var myRef = new Firebase("https://web-diary.firebaseio.com");
+		var authClient = new FirebaseSimpleLogin(myRef, function(error, user) {
+		  if (error) {
+		    // an error occurred while attempting login
+		    console.log(error);
+		  } else if (user) {
+		    // user authenticated with Firebase
+		    console.log("User ID: " + user.uid + ", Provider: " + user.provider);
+		    var twitterID = user.id;
+		    var twitterHandle = user.username;
+		    var accessToken = user.accessToken;
+		    var accessTokenSecret = user.accessTokenSecret;
+		    console.log(twitterID + ' ' + twitterHandle);
+
+		    (function() {
+		    	var xmlHttp = new XMLHttpRequest();
+		    	xmlHttp.open("GET", "http://localhost/~ash/web-diary/twitter_api.php", false);
+		    	xmlHttp.send(null);
+		    	var jsonResponse =  (JSON.parse(xmlHttp.responseText))[0];
+		    	console.log(jsonResponse.text);
+		    })();
+		  } else {
+		    // user is logged out
+		    if (confirm("Please login with twitter")) {
+			    authClient.login("twitter", {
+			    	rememberMe: true
+			    });
+
+
+
+			}
+			else {
+				alert("This is not going to work");
+			}
+		  }
+		});
+
 		$('#calendar').fullCalendar({
 			height: 550,
 			handleWindowResize: true,
