@@ -14,7 +14,7 @@ $settings = array(
 );
 
 $url = "https://api.twitter.com/1.1/statuses/user_timeline.json";
-$getField = "?screen_name=" + $GET['twitterHandle'] + "&count=1&result_type=recent";
+$getField = "?screen_name=saxinabottle" + "&count=1&result_type=recent";
 $requestMethod = 'GET';
 
 $twitter = new TwitterAPIExchange($settings);
