@@ -58,11 +58,89 @@
 			fixedWeekCount: false,
 			dayClick: function(date, jsEvent, view) {
 
-	        $('#text_area').text(date.format() + '\nFour score and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal.');
+				$('#prev').attr('onclick','').unbind('click');
+				$('#next').attr('onclick','').unbind('click');
+				$('#today').attr('onclick', '').unbind('click');
+
+			$('#calendar').fullCalendar('gotoDate', date);
+
+			var escaped = date.format('LL') + "\n\n";
+			$('#text_area').html(escaped.replace(/\n/g, '<br />'));
+
+			$('#text_area').append('Four score and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal.');
+
 	        $('#my_popup').popup('show');
 
 	        // change the day's background color just for fun
 	        //$(this).css('background-color', 'red');
+
+	        $('#prev').click(function() {
+
+	        	//show today button
+	        	//$('#today').css('display', 'true');
+
+	        	var cur_day = $('#calendar').fullCalendar('getDate');
+	        	//alert('The current date is ' + cur_day.format());
+	        	
+	        	//switch view from month to day
+	        	$('#calendar').fullCalendar('changeView', 'basicDay');
+	        	//call .prev() to go back one day
+	        	$('#calendar').fullCalendar('prev');
+	        	//call getDate to get moment for that day
+	        	var prev_day = $('#calendar').fullCalendar('getDate');
+	        	//bootleg the dayClick function
+	        	view.trigger('dayClick', prev_day, prev_day, null);
+	        	//set view back to month
+	        	$('#calendar').fullCalendar('changeView', 'month');
+
+	        	//alert('The previous date is ' + prev_day.format());
+
+	        });
+
+	        //bind next button
+	        $('#next').click(function() {
+
+	        	//show today button
+	        	//$('#today').css('display', 'true');
+
+	        	var cur_day = $('#calendar').fullCalendar('getDate');
+	        	//alert('The current date is ' + cur_day.format());
+	        	
+	        	//switch view from month to day
+	        	$('#calendar').fullCalendar('changeView', 'basicDay');
+	        	//call .prev() to go forward one day
+	        	$('#calendar').fullCalendar('next');
+	        	//call getDate to get moment for that day
+	        	var next_day = $('#calendar').fullCalendar('getDate');
+	        	//bootleg the dayClick function
+	        	view.trigger('dayClick', next_day, next_day, null);
+	        	//set view back to month
+	        	$('#calendar').fullCalendar('changeView', 'month');
+
+	        	//alert('The previous date is ' + prev_day.format());
+
+	        });
+
+	        //bind today button
+	        $('#today').click(function() {
+	        	var cur_day = $('#calendar').fullCalendar('getDate');
+	        	//alert(cur_day + ' ' + cur_day.format('LL'));
+	        	//alert('The current date is ' + cur_day.format());
+
+	        	$('#calendar').fullCalendar('today');
+
+	        	var go_today1 = $('#calendar').fullCalendar('getDate');
+	        	var go_today2 = $('#calendar').fullCalendar('getDate');
+	        	//alert(go_today1 + ' ' + go_today1.format('LL'));
+	        	//go_today1.format();
+
+	        	if (cur_day.format('LL') == go_today1.format('LL')) {
+	        		//$('#today').css('display', 'none');
+	        		//alert('hi, you are at today already');
+	        	}
+
+	        	view.trigger('dayClick', go_today2, go_today2, null);
+	        });
 	    }
 			
 		});
@@ -276,52 +354,60 @@
 
 </style>
 </head>
-<body>
+<body style="background-color: #E8E8E8">
+
+	<center>
+	<img src="http://i.imgur.com/KYbGpGq.png" style="algin:center; width: 432px; height: 144px;">
+	</center>
+
+	<div id='calendar' style="border: 5px solid; border-radius: 25px; padding-top: 20px; padding-bottom: 20px; padding-left: 50px; padding-right: 50px; background-color: #FFFFFF"></div>
 
 
-	<div id='calendar'></div>
+	<!-- Add content to the popup -->
+	<div id="my_popup">
 
-	<!-- Add an optional button to open the popup -->
-  <button class="my_popup_open">Open popup</button>
+		<div id="popup_icon">
+			<a href="https://www.twitter.com"><img src="img/twitter_icon.png" height="40"/></a>
+			<a href="https://www.facebook.com"><img src="img/facebook_icon.png" height="40"/></a>
+			<a href="https://www.instagram.com"><img src="img/instagram_icon.png" height="40"/></a>
+		</div>
 
-  <!-- Add content to the popup -->
-  <div id="my_popup">
-	  
-	<div id="popup_icon">
-		<a href="https://www.twitter.com"><img src="img/twitter_icon.png" height="40"/></a>
-		<a href="https://www.facebook.com"><img src="img/facebook_icon.png" height="40"/></a>
-		<a href="https://www.instagram.com"><img src="img/instagram_icon.png" height="40"/></a>
-	</div>
-	
-	  
-  	<div style="position: relative">
-  		<img border="0" src="https://100dialysis.files.wordpress.com/2013/03/blank-page.jpg" alt="Ah sheit" width="773.12" height="965.12">
-  		<div style="position:absolute;left:50px;top:50px; font-size: 32px;display: true">
-  			<p id="text_area">
+		<div style="position: relative">
+			<img border="4" style="border-radius: 25px;" src="https://100dialysis.files.wordpress.com/2013/03/blank-page.jpg" alt="Ah sheit" width="773.12" height="965.12">
+			<div style="position:absolute;left:50px;top:50px; font-size: 32px;display: true">
+				<p id="text_area">
 	      		Test
-	      	</p>
-	    </div>
-    
+	      		</p>
+	    	</div>
+
+	    	<img id="prev" src="http://i.imgur.com/Hxs2ZN5.png" style="width: 45px; height: 45px; position:absolute; left:4px; top:4px; cursor: pointer;"></img>
+
+	    	<img id="next" src="http://i.imgur.com/OAWjHAv.png" style="width: 45px; height: 45px; position:absolute; right:4px; top:4px; cursor: pointer;"></img>
+
+	    	<div style="width:100px; height:50px; margin-right:auto; margin-left:auto;">
+			<img id="today" src="http://i.imgur.com/1kSc5pN.png" style="height: 45px; border: solid 2px; border-radius: 25px; position:absolute; margin:auto; top:4px; cursor: pointer;"></img>
+			</div>    	
+
 	</div>
-	
-    <!-- Add an optional button to close the popup -->
-    <button class="my_popup_close">Close</button>
 
-  </div>
+	</div>
 
-  <!-- Include jQuery -->
-  
+	<!-- Include jQuery -->
 
-  <!-- Include jQuery Popup Overlay -->
-  <script src="lib/jquery-popup-overlay-gh-pages/jquery.popupoverlay.js"></script>
 
-  <script>
-    $(document).ready(function() {
+	<!-- Include jQuery Popup Overlay -->
+	<script src="lib/jquery-popup-overlay-gh-pages/jquery.popupoverlay.js"></script>
 
-      // Initialize the plugin
-      $('#my_popup').popup();
+	<script>
+	$(document).ready(function() {
 
-    });
-  </script>
+	  // Initialize the plugin
+	  $('#my_popup').popup();
+
+	});
+	</script>
+
+
+
 </body>
 </html>
