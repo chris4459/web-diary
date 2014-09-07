@@ -32,7 +32,7 @@
 		    	xmlHttp.open("GET", "http://localhost/~ash/web-diary/twitter_api.php", false);
 		    	xmlHttp.send(null);
 		    	var jsonResponse =  (JSON.parse(xmlHttp.responseText))[0];
-		    	console.log(jsonResponse.text);
+		    	console.log("Tweet: " + jsonResponse.text);
 		    })();
 		  } else {
 		    // user is logged out
@@ -49,7 +49,7 @@
 			}
 		  }
 		});
-		
+
 		$('#calendar').fullCalendar({
 			height: 550,
 			handleWindowResize: true,
