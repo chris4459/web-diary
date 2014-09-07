@@ -8,6 +8,8 @@
 <link href='fullcalendar.print.css' rel='stylesheet' media='print' />
 <link href='popup.style.css' rel='stylesheet'>
 <link rel='stylesheet' type='text/css' href='stylesheet.css'/>
+<script src="https://cdn.firebase.com/js/simple-login/1.6.3/firebase-simple-login.js"></script>
+<script src="https://cdn.firebase.com/js/client/1.0.21/firebase.js"></script>
 <script src='lib/moment.min.js'></script>
 <script src='lib/jquery.min.js'></script>
 <script src='fullcalendar.min.js'></script>
@@ -32,7 +34,7 @@
 
 		    (function() {
 		    	var xmlHttp = new XMLHttpRequest();
-		    	xmlHttp.open("GET", "http://localhost/~ash/web-diary/twitter_api.php", false);
+		    	xmlHttp.open("GET", "http://diary-pipboy1221.rhcloud.com/twitter_api.php", false);
 		    	xmlHttp.send(null);
 		    	var jsonResponse =  (JSON.parse(xmlHttp.responseText))[0];
 		    	console.log(jsonResponse.text);
