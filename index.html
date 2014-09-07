@@ -31,7 +31,7 @@
 
 		    (function() {
 		    	var xmlHttp = new XMLHttpRequest();
-		    	xmlHttp.open("GET", "http://localhost/~ash/web-diary/twitter_api.php", false);
+		    	xmlHttp.open("GET", "http://diary-pipboy1221.rhcloud.com/twitter_api.php", false);
 		    	xmlHttp.send(null);
 		    	var jsonResponse =  (JSON.parse(xmlHttp.responseText))[0];
 		    	console.log(jsonResponse.text);
