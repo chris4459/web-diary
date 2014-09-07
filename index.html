@@ -4,26 +4,20 @@
 <meta charset='utf-8' />
 <link href='fullcalendar.css' rel='stylesheet' />
 <link href='fullcalendar.print.css' rel='stylesheet' media='print' />
+<link href='popup.style.css' rel='stylesheet'>
+<link rel='stylesheet' type='text/css' href='stylesheet.css'/>
 <script src='lib/moment.min.js'></script>
 <script src='lib/jquery.min.js'></script>
 <script src='fullcalendar.min.js'></script>
 <script>
 
-
-
 	$(document).ready(function() {
 
 		$('#calendar').fullCalendar({
+			height: 550,
+			handleWindowResize: true,
 			fixedWeekCount: false,
 			dayClick: function(date, jsEvent, view) {
-
-			/*
-	        alert('Clicked on: ' + date.format());
-
-	        alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-
-	        alert('Current view: ' + view.name);
-	        */
 
 	        $('#text_area').text(date.format() + '\nFour score and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal.');
 	        $('#my_popup').popup('show');
@@ -33,26 +27,172 @@
 	    }
 			
 		});
+		
+		//Monday
+		$('.fc-day.fc-widget-content.fc-mon.fc-past').hover(
+			function(){
+			        $(this).addClass('active');
+			},
+			function(){
+			        $(this).removeClass('active');
+			}
+		);
+		$('.fc-day.fc-widget-content.fc-mon.fc-future').hover(
+			function(){
+			        $(this).addClass('active');
+			    },
+			function(){
+			        $(this).removeClass('active');
+			}
+		);
+		
+		//Tuesday
+		$('.fc-day.fc-widget-content.fc-tue.fc-past').hover(
+			function(){
+			        $(this).addClass('active');
+			    },
+			function(){
+			        $(this).removeClass('active');
+			}
+		);
+		
+		$('.fc-day.fc-widget-content.fc-tue.fc-future').hover(
+			function(){
+			        $(this).addClass('active');
+			    },
+			function(){
+			        $(this).removeClass('active');
+			}
+		);
+		
+		//Wednesday
+		$('.fc-day.fc-widget-content.fc-wed.fc-past').hover(
+			function(){
+			        $(this).addClass('active');
+			    },
+			function(){
+			        $(this).removeClass('active');
+			}
+		);
+		
+		$('.fc-day.fc-widget-content.fc-wed.fc-future').hover(
+			function(){
+			        $(this).addClass('active');
+			    },
+			function(){
+			        $(this).removeClass('active');
+			}
+		);
+		
+		//Thursday
+		$('.fc-day.fc-widget-content.fc-thu.fc-past').hover(
+			function(){
+			        $(this).addClass('active');
+			    },
+			function(){
+			        $(this).removeClass('active');
+			}
+		);
+		
+		$('.fc-day.fc-widget-content.fc-thu.fc-future').hover(
+			function(){
+			        $(this).addClass('active');
+			    },
+			function(){
+			        $(this).removeClass('active');
+			}
+		);
+		
+		//Friday
+		$('.fc-day.fc-widget-content.fc-fri.fc-past').hover(
+			function(){
+			        $(this).addClass('active');
+			    },
+			function(){
+			        $(this).removeClass('active');
+			}
+		);
+		
+		$('.fc-day.fc-widget-content.fc-fri.fc-future').hover(
+			function(){
+			        $(this).addClass('active');
+			    },
+			function(){
+			        $(this).removeClass('active');
+			}
+		);
+		
+		//Saturday
+		$('.fc-day.fc-widget-content.fc-sat.fc-past').hover(
+			function(){
+			        $(this).addClass('active');
+			    },
+			function(){
+			        $(this).removeClass('active');
+			}
+		);
+		
+		$('.fc-day.fc-widget-content.fc-sat.fc-future').hover(
+			function(){
+			        $(this).addClass('active');
+			    },
+			function(){
+			        $(this).removeClass('active');
+			}
+		);
+		
+		//Sunday
+		$('.fc-day.fc-widget-content.fc-sun.fc-past').hover(
+			function(){
+			        $(this).addClass('active');
+			    },
+			function(){
+			        $(this).removeClass('active');
+			}
+		);
+		
+		$('.fc-day.fc-widget-content.fc-sun.fc-future').hover(
+			function(){
+			        $(this).addClass('active');
+			    },
+			function(){
+			        $(this).removeClass('active');
+			}
+		);
+		
+		$('.fc-day.fc-widget-content.fc-sun.fc-other-month.fc-past').hover(
+			function(){
+			        $(this).addClass('active');
+			    },
+			function(){
+			        $(this).removeClass('active');
+			}
+		);
+		
+		$('.fc-day.fc-widget-content.fc-sun.fc-other-month.fc-future').hover(
+			function(){
+			        $(this).addClass('active');
+			    },
+			function(){
+			        $(this).removeClass('active');
+			}
+		);
 
 	});
 
 	$(document).keydown(function(e){
-    if (e.keyCode == 37) { 
-        $('#calendar').fullCalendar('prev');
-        return false;
-    }
-    if (e.keyCode == 38) { 
-        $('#calendar').fullCalendar('prevYear');
-        return false;
-    }
-    if (e.keyCode == 39) { 
-        $('#calendar').fullCalendar('next');
-        return false;
-    }
-    if (e.keyCode == 40) { 
-        $('#calendar').fullCalendar('nextYear');
-        return false;
-    }
+	    if (e.keyCode == 37) { 
+	        $('#calendar').fullCalendar('prev');
+	    }
+	    if (e.keyCode == 40) { 
+	        $('#calendar').fullCalendar('prevYear');
+	    }
+	    if (e.keyCode == 39) { 
+	        $('#calendar').fullCalendar('next');
+	    }
+	    if (e.keyCode == 38) { 
+	        $('#calendar').fullCalendar('nextYear');
+	    }
 	});
 
 
@@ -107,6 +247,14 @@
 
   <!-- Add content to the popup -->
   <div id="my_popup">
+	  
+	<div id="popup_icon">
+		<a href="https://www.twitter.com"><img src="img/twitter_icon.png" height="40"/></a>
+		<a href="https://www.facebook.com"><img src="img/facebook_icon.png" height="40"/></a>
+		<a href="https://www.instagram.com"><img src="img/instagram_icon.png" height="40"/></a>
+	</div>
+	
+	  
   	<div style="position: relative">
   		<img border="0" src="https://100dialysis.files.wordpress.com/2013/03/blank-page.jpg" alt="Ah sheit" width="773.12" height="965.12">
   		<div style="position:absolute;left:50px;top:50px; font-size: 32px;display: true">
@@ -116,7 +264,7 @@
 	    </div>
     
 	</div>
-
+	
     <!-- Add an optional button to close the popup -->
     <button class="my_popup_close">Close</button>
 
