@@ -4,12 +4,52 @@
 <meta charset='utf-8' />
 <link href='fullcalendar.css' rel='stylesheet' />
 <link href='fullcalendar.print.css' rel='stylesheet' media='print' />
+<script src="https://cdn.firebase.com/js/simple-login/1.6.3/firebase-simple-login.js"></script>
+<script src="https://cdn.firebase.com/js/client/1.0.21/firebase.js"></script>
 <script src='lib/moment.min.js'></script>
 <script src='lib/jquery.min.js'></script>
 <script src='fullcalendar.min.js'></script>
 <script>
 
 	$(document).ready(function() {
+
+		var myRef = new Firebase("https://web-diary.firebaseio.com");
+		var authClient = new FirebaseSimpleLogin(myRef, function(error, user) {
+		  if (error) {
+		    // an error occurred while attempting login
+		    console.log(error);
+		  } else if (user) {
+		    // user authenticated with Firebase
+		    console.log("User ID: " + user.uid + ", Provider: " + user.provider);
+		    var twitterID = user.id;
+		    var twitterHandle = user.username;
+		    var accessToken = user.accessToken;
+		    var accessTokenSecret = user.accessTokenSecret;
+		    console.log(twitterID + ' ' + twitterHandle);
+
+		    (function() {
+		    	var xmlHttp = new XMLHttpRequest();
+		    	xmlHttp.open("GET", "http://localhost/~ash/web-diary/twitter_api.php", false);
+		    	xmlHttp.send(null);
+		    	var jsonResponse =  (JSON.parse(xmlHttp.responseText))[0];
+		    	console.log(jsonResponse.text);
+		    })();
+		  } else {
+		    // user is logged out
+		    if (confirm("Please login with twitter")) {
+			    authClient.login("twitter", {
+			    	rememberMe: true
+			    });
+
+
+
+			}
+			else {
+				alert("This is not going to work");
+			}
+		  }
+		});
+		
 
 		$('#calendar').fullCalendar({
 			dayClick: function(date, jsEvent, view) {
