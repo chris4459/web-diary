@@ -1,3 +1,5 @@
+<!--break in text area and nav controls binded to arrow keys-->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,6 +15,7 @@
 
 	$(document).ready(function() {
 
+<<<<<<< HEAD
 		var myRef = new Firebase("https://web-diary.firebaseio.com");
 		var authClient = new FirebaseSimpleLogin(myRef, function(error, user) {
 		  if (error) {
@@ -54,14 +57,116 @@
 			height: 550,
 			handleWindowResize: true,
 			fixedWeekCount: false,
-			dayClick: function(date, jsEvent, view) {
+=======
 
+
+		$('#calendar').fullCalendar({
+			fixedWeekCount: false,
+
+			//date holds a 'moment' which we should be able
+			// to use for the navigation buttons
+
+
+<<<<<<< HEAD
 	        $('#text_area').text(date.format() + '\nFour score and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal.');
+=======
+			
+	        //alert('Clicked on: ' + date.format());
+
+	        //go to the selected date so we can use
+	        // navigation buttons later
+	        $('#calendar').fullCalendar('gotoDate', date);
+
+	        /*
+	        alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+
+	        alert('Current view: ' + view.name);
+	        */
+	        var escaped = date.format('LL') + "\n\n";
+			$('#text_area').html(escaped.replace(/\n/g, '<br />'));
+
+			$('#text_area').append('Four score and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal.');
+			/*
+
+	        $('#text_area').text(date.format('LL') + '\nFour score and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal.');
+			*/
+
+>>>>>>> Navigation_Controls
 	        $('#my_popup').popup('show');
+
+	        //bind previous button
+	        $('#prev').click(function() {
+
+	        	//show today button
+	        	//$('#today').css('display', 'true');
+
+	        	var cur_day = $('#calendar').fullCalendar('getDate');
+	        	//alert('The current date is ' + cur_day.format());
+	        	
+	        	//switch view from month to day
+	        	$('#calendar').fullCalendar('changeView', 'basicDay');
+	        	//call .prev() to go back one day
+	        	$('#calendar').fullCalendar('prev');
+	        	//call getDate to get moment for that day
+	        	var prev_day = $('#calendar').fullCalendar('getDate');
+	        	//bootleg the dayClick function
+	        	view.trigger('dayClick', prev_day, prev_day, null);
+	        	//set view back to month
+	        	$('#calendar').fullCalendar('changeView', 'month');
+
+	        	//alert('The previous date is ' + prev_day.format());
+
+	        });
+
+	        //bind next button
+	        $('#next').click(function() {
+
+	        	//show today button
+	        	//$('#today').css('display', 'true');
+
+	        	var cur_day = $('#calendar').fullCalendar('getDate');
+	        	//alert('The current date is ' + cur_day.format());
+	        	
+	        	//switch view from month to day
+	        	$('#calendar').fullCalendar('changeView', 'basicDay');
+	        	//call .prev() to go forward one day
+	        	$('#calendar').fullCalendar('next');
+	        	//call getDate to get moment for that day
+	        	var next_day = $('#calendar').fullCalendar('getDate');
+	        	//bootleg the dayClick function
+	        	view.trigger('dayClick', next_day, next_day, null);
+	        	//set view back to month
+	        	$('#calendar').fullCalendar('changeView', 'month');
+
+	        	//alert('The previous date is ' + prev_day.format());
+
+	        });
+
+	        //bind today button
+	        $('#today').click(function() {
+	        	var cur_day = $('#calendar').fullCalendar('getDate');
+	        	//alert(cur_day + ' ' + cur_day.format('LL'));
+	        	//alert('The current date is ' + cur_day.format());
+
+	        	$('#calendar').fullCalendar('today');
+
+	        	var go_today1 = $('#calendar').fullCalendar('getDate');
+	        	var go_today2 = $('#calendar').fullCalendar('getDate');
+	        	//alert(go_today1 + ' ' + go_today1.format('LL'));
+	        	//go_today1.format();
+
+	        	if (cur_day.format('LL') == go_today1.format('LL')) {
+	        		//$('#today').css('display', 'none');
+	        		//alert('hi, you are at today already');
+	        	}
+
+	        	view.trigger('dayClick', go_today2, go_today2, null);
+	        });
+
 
 	        // change the day's background color just for fun
 	        //$(this).css('background-color', 'red');
-	    }
+	    	}
 			
 		});
 		
@@ -274,14 +379,16 @@
 
 </style>
 </head>
-<body>
+<body style="background-color: #E8E8E8">
+
+	<center>
+	<img src="http://i.imgur.com/KYbGpGq.png" style="algin:center; width: 432px; height: 144px;">
+	</center>
+
+	<div id='calendar' style="border: 5px solid; border-radius: 25px; padding-top: 20px; padding-bottom: 20px; padding-left: 50px; padding-right: 50px; background-color: #FFFFFF"></div>
 
 
-	<div id='calendar'></div>
-
-	<!-- Add an optional button to open the popup -->
-  <button class="my_popup_open">Open popup</button>
-
+<<<<<<< HEAD
   <!-- Add content to the popup -->
   <div id="my_popup">
 	  
@@ -296,30 +403,29 @@
   		<img border="0" src="https://100dialysis.files.wordpress.com/2013/03/blank-page.jpg" alt="Ah sheit" width="773.12" height="965.12">
   		<div style="position:absolute;left:50px;top:50px; font-size: 32px;display: true">
   			<p id="text_area">
-	      		Test
-	      	</p>
-	    </div>
-    
-	</div>
+=======
+	<!-- Add content to the popup -->
+	<div id="my_popup">
+
+		<div style="position: relative">
+			<img border="4" style="border-radius: 25px;" src="https://100dialysis.files.wordpress.com/2013/03/blank-page.jpg" alt="Ah sheit" width="773.12" height="965.12">
+			<div style="position:absolute;left:50px;top:50px; font-size: 32px;display: true">
+				<p id="text_area">
+
+<<<<<<< HEAD
 	
     <!-- Add an optional button to close the popup -->
     <button class="my_popup_close">Close</button>
+=======
 
-  </div>
+	</div>
 
-  <!-- Include jQuery -->
-  
 
-  <!-- Include jQuery Popup Overlay -->
-  <script src="lib/jquery-popup-overlay-gh-pages/jquery.popupoverlay.js"></script>
-
-  <script>
-    $(document).ready(function() {
-
-      // Initialize the plugin
-      $('#my_popup').popup();
-
+<<<<<<< HEAD
     });
   </script>
-</body>
-</html>
+=======
+	});
+	</script>
+
+
